@@ -1,0 +1,45 @@
+-- Example 0
+3
+harry golfset 1000
+william necklace 4000
+christopher golfset 1500
+
+2
+christopher got golfset
+william got necklace
+-- Example 1
+0
+
+0
+-- Example 2
+1
+wilson racket 1000
+
+1
+wilson got racket
+-- Example 3
+3
+tom golfset 1000
+yana golfset 1100
+tom golfset 1200
+
+1
+tom got golfset
+-- Example 4
+5
+ron radio 100
+amanda book 50
+ron book 200
+ron radio 300
+aamir radio 300
+
+2
+ron got radio
+ron got book
+-- Example 5
+2
+kerry gamecd 100
+kent gamecd 100
+
+1
+kerry got gamecd

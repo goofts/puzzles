@@ -1,0 +1,58 @@
+-- Example 0
+top
+2
+toptoptop
+toptoptop
+
+6
+-- Example 1
+top
+5
+aaaaaaaaaaa
+aaaopopoaaa
+aaatototaaa
+aaaopopoaaa
+aaaaaaaaaaa
+
+41
+-- Example 2
+topcader
+8
+topcader
+oaaaaaae
+paaaaaad
+caaaaaaa
+aaaaaaac
+daaaaaap
+eaaaaaao
+redacpot
+
+37
+-- Example 3
+topcader
+8
+topcoder
+oaaaaaae
+paaaaaad
+caaaaaaa
+aaaaaaac
+daaaaaap
+eaaaaaao
+redocpot
+
+50
+-- Example 4
+a
+10
+aaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaa
+
+220

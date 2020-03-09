@@ -1,0 +1,68 @@
+-- Example 0
+1
+5 1 right
+3
+3
+
+22
+-- Example 1
+1
+5 5 right
+3
+3
+
+12
+-- Example 2
+3
+1 1 left
+1 1 right
+2 4 left
+3
+2
+
+4
+-- Example 3
+10
+20 1 left
+20 2 left
+20 3 left
+20 4 left
+20 5 left
+20 6 left
+20 7 left
+20 8 left
+20 9 left
+20 10 left
+1
+100
+
+3979100
+-- Example 4
+10
+20 1 right
+20 2 left
+20 3 right
+20 4 left
+20 5 right
+20 6 left
+20 7 right
+20 8 left
+20 9 right
+20 10 left
+1
+100
+
+1989300
+-- Example 5
+7
+4 15 left
+10 24 left
+3 35 left
+10 47 right
+4 51 right
+10 56 right
+9 65 left
+12
+34
+
+1660

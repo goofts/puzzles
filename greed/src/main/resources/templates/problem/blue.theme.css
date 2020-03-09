@@ -1,0 +1,14 @@
+body {
+    /* font color */
+    color: white;
+    /* background color */
+    background-color: #001B35;
+}
+.section .section-title {
+    /* title color */
+    color: white;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #001930;
+}

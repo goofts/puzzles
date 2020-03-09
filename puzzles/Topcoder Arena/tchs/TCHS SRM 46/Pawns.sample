@@ -1,0 +1,50 @@
+-- Example 0
+3
+a1
+a8
+h8
+
+1
+-- Example 1
+8
+a1
+b2
+c3
+d4
+e5
+f6
+g7
+h8
+
+6
+-- Example 2
+3
+g7
+h8
+h6
+
+1
+-- Example 3
+20
+c1
+c2
+c3
+c4
+c5
+c6
+c7
+c8
+f1
+f2
+f3
+f4
+f5
+f6
+f7
+f8
+a1
+a2
+a3
+a4
+
+28

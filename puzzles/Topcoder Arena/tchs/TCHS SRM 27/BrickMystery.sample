@@ -1,0 +1,24 @@
+-- Example 0
+L
+
+3
+x.......x
+xx..xx..x
+x.......x
+-- Example 1
+P=NP?
+
+7
+x.......x
+xx.x....x
+x.xxxx.xx
+xx..xxx.x
+xx.x....x
+x.xxxxxxx
+x.......x
+-- Example 2
+
+
+2
+x.......x
+x.......x

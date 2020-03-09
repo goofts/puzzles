@@ -1,0 +1,48 @@
+-- Example 0
+5
+blue,suede,old
+red
+white,borrowed
+new,white,cool,good,anything
+new
+5
+10
+4
+15
+3
+4
+
+28
+-- Example 1
+1
+new,borrowed,blue,old,nice
+1
+1
+
+1
+-- Example 2
+5
+old
+new
+borrowed
+blue
+old,new,borrowed,blue
+5
+1
+1
+1
+1
+5
+
+4
+-- Example 3
+3
+new
+old,red
+borrowed
+3
+1
+2
+3
+
+-1

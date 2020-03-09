@@ -1,0 +1,35 @@
+-- Example 0
+100
+200
+20
+10
+
+YES
+-- Example 1
+1
+100
+1
+0
+
+NO
+-- Example 2
+0
+5
+1
+2
+
+YES
+-- Example 3
+100
+0
+0
+5
+
+YES
+-- Example 4
+200
+10
+5
+10
+
+NO

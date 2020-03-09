@@ -1,0 +1,66 @@
+-- Example 0
+1
+real bayer 2:2
+bayer
+
+0
+-- Example 1
+3
+breda ajax 2:2
+breda psv 0:0
+psv ajax 1:1
+ajax
+
+0
+-- Example 2
+3
+borussia shalke 4:2
+bayer herta 3:2
+bayer bavaria 5:2
+borussia
+
+-1
+-- Example 3
+2
+spartak real 2:1
+real spartak 3:2
+spartak
+
+1
+-- Example 4
+2
+xy yx 3:2
+xx yy 1:1
+yx
+
+0
+-- Example 5
+4
+borussia shalke 4:2
+bayer herta 3:2
+bayer bavaria 5:2
+borussia verder 1:1
+borussia
+
+1
+-- Example 6
+2
+spartak dinamo 3:2
+dinamo rubin 2:2
+spartak
+
+-2
+-- Example 7
+1
+a b 9:0
+c
+
+-1
+-- Example 8
+3
+a b 0:0
+a c 1:1
+g d 3:1
+a
+
+0

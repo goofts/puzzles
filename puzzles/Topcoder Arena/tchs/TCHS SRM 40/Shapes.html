@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder TCHS SRM 40 - 1000: Shapes</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>TCHS SRM 40</span>
+        <span id='contest-division'>1</span>
+        <span id='problem-score'>1000</span>
+        <span id='problem-name'>Shapes</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro escaped="1">Your friend has set a challenge for you. He took a square piece of paper, on which was drawn a square grid parallel to the sides, and divided it up into 5 pieces by making cuts along the grid-lines. Your challenge is to reconstruct the original square from the pieces.
+<br /><br />
+You are given an <type>int</type> <b>L</b> containing the length in grid units of the sides of the original square and 5 <type>String[]</type>s: <b>s1</b>, <b>s2</b>, <b>s3</b>, <b>s4</b> and <b>s5</b>, each containing the details of the shape of one of the pieces of paper. Each character in each shape corresponds to a single square of the grid and will be a '#' if the square is present and a '.' if not. The shapes are given to you in the same orientation that they were in as part of the original square (i.e., they have not been rotated or turned over since they were cut out).
+<br /><br />
+Return a <type>String[]</type> containing the reconstructed square. The return value should contain <b>L</b> <type>String</type>s of length <b>L</b>. Character j of element i of the return value should be a digit containing the number of the shape (i.e., the digit in the supplied variable name) that the grid-square at position (i, j) was a part of. If there are multiple solutions, return the one that comes first lexicographically. The lexicographically earlier of two <type>String[]</type>s is the one with the lexicographically earlier <type>String</type> in the first position at which they differ. If there is no valid way of reconstructing the square, then your friend must be cheating and you should return a <type>String[]</type> containing a single element, &quot;CHEAT&quot; (quotes for clarity).
+<br /><br />
+The shapes must not overlap in the reconstructed square or extend outside its boundary.</intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>Shapes</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>reconstructSquare</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        integer
+                    , 
+                        tuple(string)
+                    , 
+                        tuple(string)
+                    , 
+                        tuple(string)
+                    , 
+                        tuple(string)
+                    , 
+                        tuple(string)
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        tuple(string)
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        def reconstructSquare(self, L, s1, s2, s3, s4, s5)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>64</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint escaped="1"><b>L</b> will be between 3 and 10, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>s1</b>, <b>s2</b>, <b>s3</b>, <b>s4</b> and <b>s5</b> will each contain between 1 and <b>L</b> elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <b>s1</b>, <b>s2</b>, <b>s3</b>, <b>s4</b> and <b>s5</b> will contain between 1 and <b>L</b> characters, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Within each of <b>s1</b>, <b>s2</b>, <b>s3</b>, <b>s4</b> and <b>s5</b>, every element will contain the same number of characters.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each character in <b>s1</b>, <b>s2</b>, <b>s3</b>, <b>s4</b> and <b>s5</b> will be either a '#' or a '.'.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">The first and last rows of <b>s1</b>, <b>s2</b>, <b>s3</b>, <b>s4</b> and <b>s5</b> will each contain at least 1 '#' character.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">The first and last columns of <b>s1</b>, <b>s2</b>, <b>s3</b>, <b>s4</b> and <b>s5</b> will each contain at least 1 '#' character. </user-constraint></li>
+        
+            <li><user-constraint escaped="1">The '#' characters in each of <b>s1</b>, <b>s2</b>, <b>s3</b>, <b>s4</b> and <b>s5</b> will be connected.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">L</span>
+                                <span class="value data">
+                                
+                                    5
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s1</span>
+                                <span class="value data">
+                                
+                                    { &quot;#####&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s2</span>
+                                <span class="value data">
+                                
+                                    { &quot;#####&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s3</span>
+                                <span class="value data">
+                                
+                                    { &quot;#####&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s4</span>
+                                <span class="value data">
+                                
+                                    { &quot;#####&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s5</span>
+                                <span class="value data">
+                                
+                                    { &quot;#####&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            {&quot;11111&quot;,<br />&nbsp;&quot;22222&quot;,<br />&nbsp;&quot;33333&quot;,<br />&nbsp;&quot;44444&quot;,<br />&nbsp;&quot;55555&quot;}
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">Here your friend cut the paper into strips. There are many ways that the square could be reconstructed, so we choose the lexicographically earliest.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">L</span>
+                                <span class="value data">
+                                
+                                    10
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s1</span>
+                                <span class="value data">
+                                
+                                    {&quot;##&quot;,<br />&nbsp;&quot;##&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s2</span>
+                                <span class="value data">
+                                
+                                    {&quot;########&quot;,<br />&nbsp;&quot;#......#&quot;,<br />&nbsp;&quot;#......#&quot;,<br />&nbsp;&quot;#......#&quot;,<br />&nbsp;&quot;#......#&quot;,<br />&nbsp;&quot;#......#&quot;,<br />&nbsp;&quot;#......#&quot;,<br />&nbsp;&quot;########&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s3</span>
+                                <span class="value data">
+                                
+                                    {&quot;######&quot;,<br />&nbsp;&quot;#....#&quot;,<br />&nbsp;&quot;#....#&quot;,<br />&nbsp;&quot;#....#&quot;,<br />&nbsp;&quot;#....#&quot;,<br />&nbsp;&quot;######&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s4</span>
+                                <span class="value data">
+                                
+                                    {&quot;####&quot;,<br />&nbsp;&quot;#..#&quot;,<br />&nbsp;&quot;#..#&quot;,<br />&nbsp;&quot;####&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s5</span>
+                                <span class="value data">
+                                
+                                    {&quot;##########&quot;,<br />&nbsp;&quot;#........#&quot;,<br />&nbsp;&quot;#........#&quot;,<br />&nbsp;&quot;#........#&quot;,<br />&nbsp;&quot;#........#&quot;,<br />&nbsp;&quot;#........#&quot;,<br />&nbsp;&quot;#........#&quot;,<br />&nbsp;&quot;#........#&quot;,<br />&nbsp;&quot;#........#&quot;,<br />&nbsp;&quot;##########&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            {&quot;5555555555&quot;,<br />&nbsp;&quot;5222222225&quot;,<br />&nbsp;&quot;5233333325&quot;,<br />&nbsp;&quot;5234444325&quot;,<br />&nbsp;&quot;5234114325&quot;,<br />&nbsp;&quot;5234114325&quot;,<br />&nbsp;&quot;5234444325&quot;,<br />&nbsp;&quot;5233333325&quot;,<br />&nbsp;&quot;5222222225&quot;,<br />&nbsp;&quot;5555555555&quot;}
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">This time your friend cut up the paper into rings.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">L</span>
+                                <span class="value data">
+                                
+                                    8
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s1</span>
+                                <span class="value data">
+                                
+                                    {&quot;#.....&quot;,<br />&nbsp;&quot;######&quot;,<br />&nbsp;&quot;######&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s2</span>
+                                <span class="value data">
+                                
+                                    {&quot;.###&quot;,<br />&nbsp;&quot;####&quot;,<br />&nbsp;&quot;####&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s3</span>
+                                <span class="value data">
+                                
+                                    {&quot;###..&quot;,<br />&nbsp;&quot;###..&quot;,<br />&nbsp;&quot;##...&quot;,<br />&nbsp;&quot;####.&quot;,<br />&nbsp;&quot;#####&quot;,<br />&nbsp;&quot;.####&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s4</span>
+                                <span class="value data">
+                                
+                                    {&quot;.#&quot;,<br />&nbsp;&quot;.#&quot;,<br />&nbsp;&quot;.#&quot;,<br />&nbsp;&quot;##&quot;,<br />&nbsp;&quot;##&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s5</span>
+                                <span class="value data">
+                                
+                                    {&quot;####.&quot;,<br />&nbsp;&quot;#####&quot;,<br />&nbsp;&quot;..###&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            { &quot;CHEAT&quot; }
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">These shapes cannot form a square.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">L</span>
+                                <span class="value data">
+                                
+                                    5
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s1</span>
+                                <span class="value data">
+                                
+                                    { &quot;#####&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s2</span>
+                                <span class="value data">
+                                
+                                    { &quot;#####&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s3</span>
+                                <span class="value data">
+                                
+                                    {&quot;#####&quot;,<br />&nbsp;&quot;#####&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s4</span>
+                                <span class="value data">
+                                
+                                    { &quot;#####&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s5</span>
+                                <span class="value data">
+                                
+                                    { &quot;#####&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            { &quot;CHEAT&quot; }
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">L</span>
+                                <span class="value data">
+                                
+                                    6
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s1</span>
+                                <span class="value data">
+                                
+                                    {&quot;##&quot;,<br />&nbsp;&quot;.#&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s2</span>
+                                <span class="value data">
+                                
+                                    {&quot;.#&quot;,<br />&nbsp;&quot;##&quot;,<br />&nbsp;&quot;##&quot;,<br />&nbsp;&quot;##&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s3</span>
+                                <span class="value data">
+                                
+                                    {&quot;##.&quot;,<br />&nbsp;&quot;###&quot;,<br />&nbsp;&quot;###&quot;,<br />&nbsp;&quot;##.&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s4</span>
+                                <span class="value data">
+                                
+                                    {&quot;...#..&quot;,<br />&nbsp;&quot;..##..&quot;,<br />&nbsp;&quot;######&quot;,<br />&nbsp;&quot;######&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s5</span>
+                                <span class="value data">
+                                
+                                    { &quot;#&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            {&quot;331152&quot;,<br />&nbsp;&quot;333122&quot;,<br />&nbsp;&quot;333422&quot;,<br />&nbsp;&quot;334422&quot;,<br />&nbsp;&quot;444444&quot;,<br />&nbsp;&quot;444444&quot;}
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">L</span>
+                                <span class="value data">
+                                
+                                    8
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s1</span>
+                                <span class="value data">
+                                
+                                    {&quot;##.....&quot;,<br />&nbsp;&quot;.#####.&quot;,<br />&nbsp;&quot;....###&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s2</span>
+                                <span class="value data">
+                                
+                                    {&quot;#....&quot;,<br />&nbsp;&quot;####.&quot;,<br />&nbsp;&quot;####.&quot;,<br />&nbsp;&quot;####.&quot;,<br />&nbsp;&quot;#####&quot;,<br />&nbsp;&quot;..###&quot;,<br />&nbsp;&quot;..###&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s3</span>
+                                <span class="value data">
+                                
+                                    {&quot;.###&quot;,<br />&nbsp;&quot;..##&quot;,<br />&nbsp;&quot;...#&quot;,<br />&nbsp;&quot;####&quot;,<br />&nbsp;&quot;####&quot;,<br />&nbsp;&quot;.###&quot;,<br />&nbsp;&quot;.###&quot;,<br />&nbsp;&quot;.###&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s4</span>
+                                <span class="value data">
+                                
+                                    {&quot;##&quot;,<br />&nbsp;&quot;##&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">s5</span>
+                                <span class="value data">
+                                
+                                    { &quot;###&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            {&quot;11555333&quot;,<br />&nbsp;&quot;21111133&quot;,<br />&nbsp;&quot;22221113&quot;,<br />&nbsp;&quot;22223333&quot;,<br />&nbsp;&quot;22223333&quot;,<br />&nbsp;&quot;22222333&quot;,<br />&nbsp;&quot;44222333&quot;,<br />&nbsp;&quot;44222333&quot;}
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

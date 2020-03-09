@@ -1,0 +1,83 @@
+-- Example 0
+4
+a
+b
+c
+d
+
+2
+a*c
+b*d
+-- Example 1
+4
+very
+exciting
+programming
+competition
+
+2
+very    *programming
+exciting*competition
+-- Example 2
+2
+simple
+test
+
+1
+simple*test
+-- Example 3
+14
+this
+software
+includes
+a
+number
+of
+subcomponents
+with
+separate
+copyright
+notices
+and
+license
+terms
+
+7
+this         *     with
+software     * separate
+includes     *copyright
+a            *  notices
+number       *      and
+of           *  license
+subcomponents*    terms
+-- Example 4
+18
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde
+
+9
+abcdeabcdeabcdeabcde*abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde*abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde*abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde*abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde*abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde*abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde*abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde*abcdeabcdeabcdeabcde
+abcdeabcdeabcdeabcde*abcdeabcdeabcdeabcde

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder SRM 146 - 600: Masterbrain</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>SRM 146</span>
+        <span id='contest-division'>1</span>
+        <span id='problem-score'>600</span>
+        <span id='problem-name'>Masterbrain</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro><p>Masterbrain is a two player board game in which one player decides on a secret combination of digits, while the other must figure it out in 10 guesses or less. The game differs from Mastermind in that the player making the secret combination is allowed to lie once.</p>
+<p>The game consists of one player making a sequence of guesses about what the secret combination is, and the other player giving him or her certain information about the quality of the guess.  The following is how each guess is analyzed: if a digit is in the correct position then a black peg is given. If a digit is in the guess but in the wrong position then a white peg is given. For all other cases no pegs are given.</p>
+<p>For example, if guess = &quot;1234&quot;, secret = &quot;2335&quot;. Analyzing the guess digit by digit; the '1' is not in secret - no pegs given. The '2' is in secret but not in the right place - white peg given. The '3' is in secret and in the right place - black peg given. The '4' is not in secret - no pegs given. Result should be &quot;1b 1w&quot;, meaning one black peg and one white peg. Now, if guess is &quot;2334&quot; and secret is &quot;3224&quot;, we have the following: '2' is in secret, but not in the right place - white peg given. The first '3' is in secret, but not in the right place - white peg given. Since the '3' in secret has been used, the second '3' in guess should return no pegs. The '4' is in secret and in the right place - black peg given. Result should be &quot;1b 2w&quot;.</p>
+<p>Given a <type>String[]</type> of <b>guesses</b> and a <type>String[]</type> of <b>results</b> for those guesses, return the total number of possible secret combinations, assuming that exactly one of the results is incorrect. Each element of <b>results</b> will be formatted as &quot;&lt;x&gt;b &lt;y&gt;w&quot;, where &lt;x&gt; and &lt;y&gt; are the number of black and white pegs respectively.</p></intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>Masterbrain</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>possibleSecrets</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        vector&lt;string&gt;
+                    , 
+                        vector&lt;string&gt;
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        int
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        int possibleSecrets(vector&lt;string&gt; guesses, vector&lt;string&gt; results)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>64</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    <!-- Notes -->
+    <div class="section">
+        <h2 class="section-title">Notes</h2>
+        <ul class="notes">
+        
+            <li><note>The second player must lie exactly once.</note></li>
+        
+            <li><note>Black pegs always take precedence over white pegs.  Thus, when analyzing a guess, black pegs are assigned first, and then white pegs are assigned.</note></li>
+        
+            <li><note>No digit in either a guess or a secret combination may be involved in giving more than one peg.</note></li>
+        
+        </ul>
+    </div>
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint><b>guesses</b> and <b>results</b> will have the same number of elements.</user-constraint></li>
+        
+            <li><user-constraint><b>guesses</b> will have between 1 and 10 elements inclusive.</user-constraint></li>
+        
+            <li><user-constraint><b>results</b> will have between 1 and 10 elements inclusive.</user-constraint></li>
+        
+            <li><user-constraint>each element in <b>guesses</b> will contain exactly 4 characters and will only contain digits between '1' and '7' inclusive.</user-constraint></li>
+        
+            <li><user-constraint>each element in <b>results</b> will contain exactly 5 characters.</user-constraint></li>
+        
+            <li><user-constraint>each element of <b>results</b> will be formatted as follows: &quot;&lt;x&gt;b &lt;y&gt;w&quot;, where &lt;x&gt; represents the number of black pegs and &lt;y&gt; represents the number of white pegs in a guess. &lt;x&gt; and &lt;y&gt; are non-negative integers whose sum is less than or equal to 4.</user-constraint></li>
+        
+            <li><user-constraint><b>results</b> will never have &quot;3b 1w&quot;, because that is impossible.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">guesses</span>
+                                <span class="value data">
+                                
+                                    { &quot;1575&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">results</span>
+                                <span class="value data">
+                                
+                                    { &quot;4b 0w&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            2400
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">If the result was true, we would conclude that 1575 is the only possible combination. However, we know that the second player must lie exactly once, thus we know that 1575 is the only combination NOT possible. Since there are 7^4 = 2401 total combinations, the method should return 2401-1 = 2400.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">guesses</span>
+                                <span class="value data">
+                                
+                                    { &quot;1234&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">results</span>
+                                <span class="value data">
+                                
+                                    { &quot;0b 4w&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            2392
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">If the result was true then the set of secret combinations would have 9 elements: {2143, 2341, 2413, 3142, 3412, 3421, 4123, 4312, 4321}. But since the result is false, we must subtract this number from the total. The method should return 2401-9 = 2392.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">guesses</span>
+                                <span class="value data">
+                                
+                                    {&quot;6172&quot;,<br />&nbsp;&quot;6162&quot;,<br />&nbsp;&quot;3617&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">results</span>
+                                <span class="value data">
+                                
+                                    {&quot;3b 0w&quot;,<br />&nbsp;&quot;2b 1w&quot;,<br />&nbsp;&quot;0b 3w&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            14
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">If all results were true, then the secret must be 6176. If the first result is false then the set of secret combinations is {1362, 1762, 2163, 6123, 6136, 6176, 6361, 6761, 7166}. If the second result is false then set is {6132, 6171, 6174, 6175, 6176, 6372}. Finally, if the third result is false then the set is {6176, 6672}. Thus the method should return (9-1)+(6-1)+(2-1) = 14.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">guesses</span>
+                                <span class="value data">
+                                
+                                    {&quot;1513&quot;,<br />&nbsp;&quot;5654&quot;,<br />&nbsp;&quot;4564&quot;,<br />&nbsp;&quot;1377&quot;,<br />&nbsp;&quot;1671&quot;,<br />&nbsp;&quot;1342&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">results</span>
+                                <span class="value data">
+                                
+                                    {&quot;1b 0w&quot;,<br />&nbsp;&quot;0b 1w&quot;,<br />&nbsp;&quot;1b 0w&quot;,<br />&nbsp;&quot;1b 0w&quot;,<br />&nbsp;&quot;0b 1w&quot;,<br />&nbsp;&quot;0b 1w&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            6
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">guesses</span>
+                                <span class="value data">
+                                
+                                    {&quot;2611&quot;,<br />&nbsp;&quot;1371&quot;,<br />&nbsp;&quot;7417&quot;,<br />&nbsp;&quot;2647&quot;,<br />&nbsp;&quot;3735&quot;,<br />&nbsp;&quot;4272&quot;,<br />&nbsp;&quot;2442&quot;,<br />&nbsp;&quot;3443&quot;,<br />&nbsp;&quot;1252&quot;,<br />&nbsp;&quot;3353&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">results</span>
+                                <span class="value data">
+                                
+                                    {&quot;0b 2w&quot;,<br />&nbsp;&quot;0b 2w&quot;,<br />&nbsp;&quot;0b 1w&quot;,<br />&nbsp;&quot;0b 2w&quot;,<br />&nbsp;&quot;1b 0w&quot;,<br />&nbsp;&quot;1b 0w&quot;,<br />&nbsp;&quot;1b 0w&quot;,<br />&nbsp;&quot;0b 1w&quot;,<br />&nbsp;&quot;1b 1w&quot;,<br />&nbsp;&quot;0b 1w&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            1
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

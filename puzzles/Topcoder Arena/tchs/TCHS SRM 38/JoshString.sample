@@ -1,0 +1,20 @@
+-- Example 0
+bad
+
+YES
+-- Example 1
+badbad
+
+NO
+-- Example 2
+abcdefghijklmnopqrstuvwxyz
+
+NO
+-- Example 3
+abcdefghijklmnopqrstuvwxyzaa
+
+YES
+-- Example 4
+asdjkhqwaieyajhdjsahjquawyhasdhwauyashjzxdf
+
+YES

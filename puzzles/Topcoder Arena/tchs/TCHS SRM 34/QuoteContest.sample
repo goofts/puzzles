@@ -1,0 +1,26 @@
+-- Example 0
+3
+4 1 firstquote
+10 2 secondquote
+1 5 thirdquote
+
+secondquote
+-- Example 1
+3
+13 5 nocodecanbreakme
+10 6 iamthebest
+13 2 trytochallengeme
+
+nocodecanbreakme
+-- Example 2
+3
+1 1 justdoit
+1 2 thewinnertakeitall
+1 4 aboutthechallenge
+
+aboutthechallenge
+-- Example 3
+1
+1 1 theworstquoteintheworld
+
+theworstquoteintheworld

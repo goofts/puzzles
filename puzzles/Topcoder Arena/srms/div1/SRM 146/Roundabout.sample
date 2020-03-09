@@ -1,0 +1,63 @@
+-- Example 0
+--
+--
+WE
+-S
+
+6
+-- Example 1
+WWW
+NNN
+---
+---
+
+9
+-- Example 2
+SSS
+WW-
+N
+S------
+
+13
+-- Example 3
+SSS-
+--W---W
+WE
+-S
+
+14
+-- Example 4
+E
+-N
+W
+-S
+
+5
+-- Example 5
+
+
+
+
+
+0
+-- Example 6
+W
+
+--E
+
+
+6
+-- Example 7
+ES
+N
+E
+
+
+9
+-- Example 8
+E
+SN
+-N
+S-E
+
+12

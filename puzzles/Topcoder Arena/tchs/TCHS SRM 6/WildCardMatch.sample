@@ -1,0 +1,30 @@
+-- Example 0
+abcd
+bcd
+
+1
+-- Example 1
+abcd
+b??
+
+1
+-- Example 2
+aaaabbb
+aa????b
+
+0
+-- Example 3
+asdjkhajksdhajksdh
+asdjkhasdjk?
+
+6
+-- Example 4
+niceone
+ieo?e
+
+2
+-- Example 5
+abcaa
+abcba
+
+1

@@ -1,0 +1,56 @@
+-- Example 0
+3
+1000 100 a
+500 80 b
+600 120 c
+3
+a 0
+b 5
+c 10
+
+199.0
+-- Example 1
+3
+1000 150 beta
+1500 200 beta
+2000 250 beta
+3
+alpha 0
+beta 10
+gamma 20
+
+90.0
+-- Example 2
+3
+1000 400 hopeless
+1000 400 bad
+1000 400 weak
+3
+weak 50
+bad 75
+hopeless 100
+
+-1950.0
+-- Example 3
+2
+500 55 ok
+1500 170 fine
+2
+ok 10
+fine 10
+
+2.5
+-- Example 4
+7
+8132 19387 s
+20219 1791 iarkhyvewuqo
+19219 4464 s
+6947 18098 s
+28985 7338 iarkhyvewuqo
+21878 7894 iarkhyvewuqo
+21495 8307 s
+2
+s 13
+iarkhyvewuqo 16
+
+39395.83

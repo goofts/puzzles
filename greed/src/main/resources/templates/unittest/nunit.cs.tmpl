@@ -1,0 +1,60 @@
+using System;
+using NUnit.Framework;
+
+[TestFixture]
+public class ${ClassName}Test
+{
+${<if Method.ReturnType.RealNumber}
+	class TcDoubleEqualityComparer : System.Collections.Generic.IEqualityComparer<double>
+	{
+		public bool Equals(double x, double y)
+		{
+			double eps = 1e-9;
+			return
+				!double.IsNaN(x) && !double.IsNaN(y)
+				&& Math.Abs(x - y) <= eps*Math.Max(1.0, Math.Min(Math.Abs(x), Math.Abs(y)));
+		}
+
+		public int GetHashCode(double obj)
+		{
+			// Not relevant
+			throw new NotImplementedException();
+		}
+	}
+
+	private static void AssertTcEqualTo<T>(T expected, T actual)
+	{
+		Assert.That(actual, Is.EqualTo(expected).Using(new TcDoubleEqualityComparer()));
+	}
+
+${<end}
+${<foreach Examples e}
+	[Test]
+	public void Example${e.Num}()
+	{
+${<foreach e.Input in}
+${<if !in.Param.Type.Array}
+		${in.Param.Type.Primitive} ${in.Param.Name} = ${in};
+${<else}
+		${in.Param.Type.Primitive}[] ${in.Param.Name} = new ${in.Param.Type} {${foreach in.ValueList v ,}
+			${v}${end}
+		};
+${<end}
+${<end}
+${<if !e.Output.Param.Type.Array}
+		${e.Output.Param.Type.Primitive} __expected = ${e.Output};
+${<else}
+		${e.Output.Param.Type.Primitive}[] __expected = new ${e.Output.Param.Type} {${foreach e.Output.ValueList v ,}
+			${v}${end}
+		};
+${<end}
+		${Method.ReturnType} __result = new ${ClassName}().${Method.Name}(${foreach e.Input in , }${in.Param.Name}${end});
+${<if Method.ReturnType.RealNumber}
+		AssertTcEqualTo(__expected, __result);
+${<else}
+		Assert.AreEqual(__expected, __result);
+${<end}
+	}
+
+${<end}
+}

@@ -1,0 +1,78 @@
+-- Example 0
+2
+a b c
+c a d
+2
+a b c f
+c a d e
+
+3
+4
+2
+0
+-- Example 1
+1
+abc abcd
+1
+abcde
+
+3
+2
+1
+0
+-- Example 2
+2
+a b cd
+qq ee rre
+4
+a b c d e
+a cd t q
+a cd t
+qq ee q
+
+3
+6
+2
+3
+-- Example 3
+1
+a
+3
+a b c
+a b c d
+a b c d
+
+3
+1
+0
+3
+-- Example 4
+3
+alex
+serge
+vitalik
+0
+
+3
+3
+0
+0
+-- Example 5
+0
+3
+dmitry victor
+dmitry
+victor
+
+3
+0
+2
+0
+-- Example 6
+0
+0
+
+3
+0
+0
+0

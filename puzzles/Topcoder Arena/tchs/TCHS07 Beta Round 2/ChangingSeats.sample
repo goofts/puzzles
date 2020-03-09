@@ -1,0 +1,20 @@
+-- Example 0
+X.X
+
+1
+-- Example 1
+X.X.XXX
+
+3
+-- Example 2
+....X.X.X.X.XXXXX
+
+10
+-- Example 3
+.XXXXX..........X.X.XX......X.XX....
+
+81
+-- Example 4
+....................
+
+0

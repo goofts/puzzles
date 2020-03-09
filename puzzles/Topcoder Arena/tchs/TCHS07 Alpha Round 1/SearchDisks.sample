@@ -1,0 +1,20 @@
+-- Example 0
+beatles queen abba
+abba
+
+0
+-- Example 1
+beatles queen abba
+beatles
+
+2
+-- Example 2
+a b c
+b
+
+1
+-- Example 3
+t k o h z s v r i c e d n f a m u w p g j q x y l
+f
+
+11

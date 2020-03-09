@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder SRM 157 - 500: Table</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>SRM 157</span>
+        <span id='contest-division'>1</span>
+        <span id='problem-score'>500</span>
+        <span id='problem-name'>Table</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro><p>A table is a common structure used in HTML when doing the layout of a home page. A table without any merged cells simply contains <i>rows</i>*<i>columns</i> basic cells (see figure 1 below). It's often desirable to merge several basic cells, either horizontally, vertically, or both, in which case the table may look like the one in figure 2. A merged cell will always be of rectangular shape, so the table in figure 3 is not a valid table.</p>
+
+<img src="http://www.topcoder.com/contest/problem/Table/table.gif"></img>
+
+<p>Each cell in the table is described with a 3-tuple in the format (<i>colspan</i>,<i>rowspan</i>,<i>content</i>) where <i>colspan</i> and <i>rowspan</i> are integers between 1 and 9, inclusive, representing the width and height of the cell (in basic cell units) and <i>content</i> is an upper case letter ('A'-'Z').</p>
+
+<p>The table will be described as a <type>String[]</type> where each element corresponds to a row of basic cells in the table, and the cells in each row are described from left to right. The merged cells are defined in the input by their upper left corner, the other parts of a merged cell are not explicitly defined in the input. Thus, element <i>i</i> will represent all cells whose upper left corner are in the <i>i</i>th row. Consider figure 4 below: the shaded &quot;cells&quot; are part of a merged cell and will not be mentioned in the description.</p>
+
+<img src="http://www.topcoder.com/contest/problem/Table/table2.gif"></img>
+
+<p>Thus this table will be described like this:</p>
+
+<pre>
+{&quot;(1,1,A)(2,1,B)(1,1,C)(1,1,D)&quot;,
+ &quot;(1,1,E)(1,1,F)(1,1,G)(1,1,H)(1,1,I)&quot;,
+ &quot;(1,3,J)(1,1,K)(3,2,L)&quot;,
+ &quot;(1,1,M)&quot;,
+ &quot;(1,1,N)(1,1,O)(1,1,P)(1,1,Q)&quot;,
+ &quot;(1,1,R)(1,1,S)(1,1,T)(1,1,U)(1,1,V)&quot;}
+</pre>
+
+<p>The desired output is the same table but in matrix form. That is, each basic cell should occupy one character in a <type>String[]</type>. You may assume that the input table is valid, that all rows will contain the same number of basic cells, that no cell will be missing or overlapped.</p>
+
+<p>Create a class Table containing the method layout which takes a <type>String[]</type> <b>tbl</b> which describes a table in the format above and returns a <type>String[]</type> containing the table in the matrix form described above.</p></intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>Table</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>layout</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        vector&lt;string&gt;
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        vector&lt;string&gt;
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        vector&lt;string&gt; layout(vector&lt;string&gt; tbl)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>64</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    <!-- Notes -->
+    <div class="section">
+        <h2 class="section-title">Notes</h2>
+        <ul class="notes">
+        
+            <li><note>It's possible that a row might be empty, see example 1.</note></li>
+        
+            <li><note>If you are using a plugin and you don't see the pictures, you may want to read the problem statement in the applet.</note></li>
+        
+        </ul>
+    </div>
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint><b>tbl</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint>Each element in <b>tbl</b> will contain between 0 and 50 characters, inclusive.</user-constraint></li>
+        
+            <li><user-constraint>Each element in <b>tbl</b> will contain zero or more tuples in the format above, with no extra characters.</user-constraint></li>
+        
+            <li><user-constraint><b>tbl</b> will describe a valid table with no cells missing or overlapping.</user-constraint></li>
+        
+            <li><user-constraint>The return value will contain between 1 and 50 elements, inclusive, and each element will contain between 1 and 50 characters, inclusive.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">tbl</span>
+                                <span class="value data">
+                                
+                                    { &quot;(1,1,A)(2,1,B)(1,1,C)(1,1,D)&quot;, &quot;(1,1,E)(1,1,F)(1,1,G)(1,1,H)(1,1,I)&quot;, &quot;(1,3,J)(1,1,K)(3,2,L)&quot;, &quot;(1,1,M)&quot;, &quot;(1,1,N)(1,1,O)(1,1,P)(1,1,Q)&quot;, &quot;(1,1,R)(1,1,S)(1,1,T)(1,1,U)(1,1,V)&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            {&quot;ABBCD&quot;,<br />&nbsp;&quot;EFGHI&quot;,<br />&nbsp;&quot;JKLLL&quot;,<br />&nbsp;&quot;JMLLL&quot;,<br />&nbsp;&quot;JNOPQ&quot;,<br />&nbsp;&quot;RSTUV&quot;}
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment"><p>This is the example in the problem text:</p>
+
+<pre>
+ABBCD
+EFGHI
+JKLLL
+JMLLL
+JNOPQ
+RSTUV
+</pre></div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">tbl</span>
+                                <span class="value data">
+                                
+                                    { &quot;(1,3,N)(3,2,E)(3,1,M)(1,1,Q)&quot;, &quot;(1,1,T)(3,1,U)&quot;, &quot;(1,1,Y)(4,5,A)(1,2,V)(1,2,W)&quot;, &quot;(1,3,G)(1,3,Z)&quot;, &quot;(1,2,S)(1,3,D)&quot;, &quot;&quot;, &quot;(1,2,P)(1,2,F)(1,3,J)&quot;, &quot;(1,1,L)(3,3,K)(1,1,R)&quot;, &quot;(3,2,B)(1,1,D)&quot;, &quot;(2,1,A)&quot;, &quot;(2,3,O)(4,1,X)(1,1,I)(1,1,B)&quot;, &quot;(3,2,H)(3,2,C)&quot;, &quot;&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            {&quot;NEEEMMMQ&quot;,<br />&nbsp;&quot;NEEETUUU&quot;,<br />&nbsp;&quot;NYAAAAVW&quot;,<br />&nbsp;&quot;GZAAAAVW&quot;,<br />&nbsp;&quot;GZAAAASD&quot;,<br />&nbsp;&quot;GZAAAASD&quot;,<br />&nbsp;&quot;PFAAAAJD&quot;,<br />&nbsp;&quot;PFLKKKJR&quot;,<br />&nbsp;&quot;BBBKKKJD&quot;,<br />&nbsp;&quot;BBBKKKAA&quot;,<br />&nbsp;&quot;OOXXXXIB&quot;,<br />&nbsp;&quot;OOHHHCCC&quot;,<br />&nbsp;&quot;OOHHHCCC&quot;}
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">Note the two empty rows!</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">tbl</span>
+                                <span class="value data">
+                                
+                                    { &quot;(9,9,A)(9,9,B)(9,9,C)(9,9,D)(9,9,E)(5,9,F)&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;(9,9,G)(9,9,H)(9,9,I)(9,9,J)(9,9,K)(5,9,L)&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;(9,9,A)(9,9,B)(9,9,C)(9,9,D)(9,9,E)(5,9,F)&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;(9,9,G)(9,9,H)(9,9,I)(9,9,J)(9,9,K)(5,9,L)&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;(9,9,A)(9,9,B)(9,9,C)(9,9,D)(9,9,E)(5,9,F)&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;(9,5,G)(9,5,H)(9,5,I)(9,5,J)(9,5,K)(5,5,L)&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            {&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;AAAAAAAAABBBBBBBBBCCCCCCCCCDDDDDDDDDEEEEEEEEEFFFFF&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;,<br />&nbsp;&quot;GGGGGGGGGHHHHHHHHHIIIIIIIIIJJJJJJJJJKKKKKKKKKLLLLL&quot;}
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

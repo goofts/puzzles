@@ -1,0 +1,44 @@
+-- Example 0
+2
+0
+2
+YY
+YY
+
+YY
+-- Example 1
+0
+0
+2
+YN
+YY
+
+
+-- Example 2
+1
+1
+4
+YNN
+NYN
+NNN
+NNY
+
+
+-- Example 3
+1
+0
+1
+N
+
+N
+-- Example 4
+0
+0
+5
+NYNYNYNYN
+NNYNYNYYN
+YNYNYNYYN
+NYYNYYNYN
+NNYNYNYNY
+
+NNNNNNNNN

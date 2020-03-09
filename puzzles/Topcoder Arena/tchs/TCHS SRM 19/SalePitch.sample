@@ -1,0 +1,30 @@
+-- Example 0
+$6.00
+$4.00
+
+BUY 2 GET 1 FREE
+-- Example 1
+$100.00
+$0.50
+
+BUY 1 GET 199 FREE
+-- Example 2
+$12.34
+$5.67
+
+BUY 567 GET 667 FREE
+-- Example 3
+$12.34
+$8.64
+
+BUY 432 GET 185 FREE
+-- Example 4
+$9069.96
+$4972.81
+
+BUY 497281 GET 409715 FREE
+-- Example 5
+$1000.00
+$65.50
+
+BUY 131 GET 1869 FREE

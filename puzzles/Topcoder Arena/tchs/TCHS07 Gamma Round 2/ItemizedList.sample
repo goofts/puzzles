@@ -1,0 +1,60 @@
+-- Example 0
+6
+apple
+orange
+apple
+banana
+apple
+orange
+
+3
+apple - 3
+banana - 1
+orange - 2
+-- Example 1
+4
+apple
+apple
+apple
+apple
+
+1
+apple - 4
+-- Example 2
+3
+apple
+orange
+banana
+
+3
+apple - 1
+banana - 1
+orange - 1
+-- Example 3
+15
+apple
+orange
+apple
+banana
+apple
+apple
+orange
+apple
+banana
+apple
+apple
+orange
+apple
+banana
+apple
+
+3
+apple - 9
+banana - 3
+orange - 3
+-- Example 4
+1
+apple
+
+1
+apple - 1

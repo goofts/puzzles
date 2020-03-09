@@ -1,0 +1,28 @@
+-- Example 0
+,
+
+QUINES 0
+-- Example 1
+_
+
+TIMEOUT
+-- Example 2
+1:+:1J
+
+OVERFLOW 147
+-- Example 3
+0,1+:#@:$1J
+
+QUINES 91
+-- Example 4
+0,1+::9W-9W-S1W1W:+2_J_@_@
+
+BADEND 437
+-- Example 5
+#R,#:+1+:#,R#
+
+QUINES 97
+-- Example 6
+R,#1+1:
+
+MISMATCH 7

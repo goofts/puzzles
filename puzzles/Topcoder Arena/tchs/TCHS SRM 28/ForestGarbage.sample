@@ -1,0 +1,75 @@
+-- Example 0
+6
+......
+g..F..
+......
+..g...
+......
+...S.g
+
+2
+0
+0
+-- Example 1
+4
+....
+..F.
+....
+..S.
+
+2
+0
+0
+-- Example 2
+7
+.....
+..F..
+..g..
+.....
+ggggg
+.....
+..S..
+
+2
+1
+2
+-- Example 3
+7
+........
+g..g...g
+........
+.g...g..
+..g.g..S
+.F.g....
+......g.
+
+2
+0
+3
+-- Example 4
+7
+gggggg
+gggFgg
+gggggg
+gggggg
+gggggg
+gggggg
+gSgggg
+
+2
+6
+0
+-- Example 5
+8
+S............
+gggggggggggg.
+.............
+.gggggggggggg
+.............
+gggggggggggg.
+.F.g...g...g.
+.....g...g...
+
+2
+0
+54

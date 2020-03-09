@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder TCHS SRM 5 - 1000: TextEditorNavigation</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>TCHS SRM 5</span>
+        <span id='contest-division'>1</span>
+        <span id='problem-score'>1000</span>
+        <span id='problem-name'>TextEditorNavigation</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro>When programming, I don't like to take my fingers off the keyboard, and hence, I don't use the mouse.  So, when navigating my source, I like to do so in such a way as to minimize keystrokes.  My text editor supports the following keystrokes: left, right, up, down, home, end, top, bottom, word left and word right.  The word left and word right keystrokes position the cursor at a word beginning; a word beginning is the first letter of the word.  None of the keystrokes cause the cursor to wrap.  When moving the cursor vertically, my text editor does not change the cursor's horizontal position.  So, if the cursor is at column 50 and the up arrow is pressed, moving the cursor to a row with only 10 characters, only the row changes.  My text editor does not allow the cursor to be positioned left of the first column, above the first row or below the last row.  
+
+<br /><br />The keys left, right, up, down, home, end, top, bottom, word left and word
+right behave as described below:
+
+<br /><br />1.  left, right, up and down - move the cursor one position in the indicated direction (see notes).  
+<br />2.  home - causes the cursor to move to column 0 of the current row.
+<br />3.  end - causes the cursor to move to the last character of <b>source</b> in the current row.
+<br />4.  top - causes the cursor to move to the top row (row 0) retaining its column position.
+<br />5.  bottom - causes the cursor to move to the bottom row retaining its column position.
+<br />6. word left - causes the cursor to jump to the first word beginning that is strictly left of the cursor position, if one exists.  Otherwise does nothing. 
+<br />7. word right - causes the cursor to jump to the first word beginning that is strictly right of the cursor position, if one exists.  Otherwise does nothing.
+
+<br /><br />You will be given a <type>String[]</type> <b>source</b> representing the source code, a <type>int[]</type> <b>start</b> representing the starting position of the cursor and a <type>int[]</type> <b>finish</b> representing the ending position of the cursor.  The first int in both <b>start</b> and <b>finish</b> specifies the 0-indexed row and the second int specifies the 0-indexed column.  You are to calculate and return the minimum number of keystrokes required to get from <b>start</b> to <b>finish</b>.</intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>TextEditorNavigation</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>keystrokes</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        tuple(string)
+                    , 
+                        tuple(integer)
+                    , 
+                        tuple(integer)
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        integer
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        def keystrokes(self, source, start, finish)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>64</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    <!-- Notes -->
+    <div class="section">
+        <h2 class="section-title">Notes</h2>
+        <ul class="notes">
+        
+            <li><note>For the purposes of this problem, we use the convention that the cursor covers each character.  Some editors (normally in &quot;insert mode&quot;) have the cursor preceding each character.</note></li>
+        
+            <li><note>A keypress may not have any effect.  For example, pressing up in the top row does nothing, pressing left in the first column does nothing and pressing down in the bottom row does nothing.  Pressing right always has an effect.</note></li>
+        
+        </ul>
+    </div>
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint><b>source</b> will contain between 1 and 50 elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint>Each element of <b>source</b> will contain between 1 and 50 characters, inclusive.</user-constraint></li>
+        
+            <li><user-constraint>Each character must be a letter ('a'-'z', 'A'-'Z') or ' '.</user-constraint></li>
+        
+            <li><user-constraint><b>start</b> and <b>finish</b> will each contain exactly 2 elements.</user-constraint></li>
+        
+            <li><user-constraint><b>start</b> and <b>finish</b> will each represent character positions that exist in <b>source</b>.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">source</span>
+                                <span class="value data">
+                                
+                                    { &quot;AAAAA AAA AAAAAAAAAAAAA  AAAA&quot;, &quot;AA   AAAAAAAAA AAAA     AAAA&quot;, &quot;BBBBBBBBBBBBBBBBBBBBBBBBBBB&quot;, &quot;BBBBBBB BBBBBBBBBB BBBBBBB&quot;, &quot;CCC CCCC CCCCCC      CCCC&quot;, &quot;DDDDDDDDDDDDDDDDDDD&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">start</span>
+                                <span class="value data">
+                                
+                                    { 5, 7 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">finish</span>
+                                <span class="value data">
+                                
+                                    { 2, 2 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            6
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">This can be achieved by the following keystrokes in the given order: home, top, down, down, right, right.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">source</span>
+                                <span class="value data">
+                                
+                                    {&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;BB BB BB BB BB BB BB BB BB BB BB BB BB BB BB BB BB&quot;,<br />&nbsp;&quot;CCC CCC CCC CCC CCC CCC CCC CCC CCC CCC CCC CCC CC&quot;,<br />&nbsp;&quot;DDDD DDDD DDDD DDDD DDDD DDDD DDDD DDDD DDDD DDDD &quot;,<br />&nbsp;&quot;EEEEE EEEEE EEEEE EEEEE EEEEE EEEEE EEEEE EEEEE EE&quot;,<br />&nbsp;&quot;FFFF FFFF FFFF FFFF FFFF FFFF FFFF FFFF FFFF FFFF &quot;,<br />&nbsp;&quot;GGG GGG GGG GGG GGG GGG GGG GGG GGG GGG GGG GGG GG&quot;,<br />&nbsp;&quot;HHHHHHHHHHH HHHHHHHHHH HHHHHHHHHH HHHHHHHHHH HHHHH&quot;,<br />&nbsp;&quot;IIIIIIIIIIIIIII IIIIIIIIIIIIIII IIIIIIIIIIIIIII   &quot;,<br />&nbsp;&quot;JJJJJJJJ JJJJJJJJ JJJJJJJJ JJJJJJJJ JJJJJJJJ JJJJJ&quot;,<br />&nbsp;&quot;KKKKKKKKKKKKKKKKKKKKKKKKKK KKKKKKKKKKKKKKKKKKKKKKK&quot;,<br />&nbsp;&quot;LLLLLLLLLL LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL&quot;,<br />&nbsp;&quot;MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM&quot;,<br />&nbsp;&quot;N N N N N N N N N N N N N N N N N N N N N N N N N &quot;,<br />&nbsp;&quot;OOOOO OOOO OOO OO O O OO OOO OOOO OOOOO OOOOOO OOO&quot;,<br />&nbsp;&quot;PPPPPPP PPPPPP PPPPP PPPP PPP PP P P PP PPP PPPP P&quot;,<br />&nbsp;&quot;QQQQQQ QQQQQ QQQQ QQQ QQ Q Q QQ QQQ QQQQ QQQQQ QQQ&quot;,<br />&nbsp;&quot;ZZZZ ZZ ZZZ ZZ ZZZZ ZZ ZZZ ZZ ZZZZ ZZ ZZZ ZZ ZZZZ &quot;,<br />&nbsp;&quot;SSS S SSS S SSS S SSS S SSS S SSS S SSS S SSS S SS&quot;,<br />&nbsp;&quot;TT TT TT TT TT TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">start</span>
+                                <span class="value data">
+                                
+                                    { 12, 20 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">finish</span>
+                                <span class="value data">
+                                
+                                    { 4, 36 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            8
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">source</span>
+                                <span class="value data">
+                                
+                                    { &quot;A A A A AAAAAAA A A A A A A A A A A&quot;, &quot;B BBBBB B B B B BBBBB B B B B B B B B&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">start</span>
+                                <span class="value data">
+                                
+                                    { 1, 0 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">finish</span>
+                                <span class="value data">
+                                
+                                    { 1, 22 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            6
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">source</span>
+                                <span class="value data">
+                                
+                                    { &quot;AAAAAAAAAAAAAA A A A A A A A A A A&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">start</span>
+                                <span class="value data">
+                                
+                                    { 0, 2 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">finish</span>
+                                <span class="value data">
+                                
+                                    { 0, 15 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            1
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">source</span>
+                                <span class="value data">
+                                
+                                    {&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;N N N N N N N N N N N N N N N N N N N N N N N N N &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot;A A A A A A A A A A A A A A A A A A A A A A A A A &quot;,<br />&nbsp;&quot; O O O O O O O O O O O O OO O O O O O O O O O O O &quot;,<br />&nbsp;&quot; P P P P P P P P P P P P P PP P P P P P P P P P P &quot;,<br />&nbsp;&quot; Q Q Q Q Q Q Q Q Q Q Q Q Q Q QQ Q Q Q Q Q Q Q Q Q &quot;,<br />&nbsp;&quot; R R R R R R R R R R R R R R R RR R R R R R R R R &quot;,<br />&nbsp;&quot; S S S S S S S S S S S S S S S S SS S S S S S S S &quot;,<br />&nbsp;&quot; T T T T T T T T T T T T T T T T T TT T T T T T T &quot;,<br />&nbsp;&quot; U U U U U U U U U U U U U U U U U U UU U U U U U &quot;,<br />&nbsp;&quot; V V V V V V V V V V V V V V V V V V V VV V V V V &quot;,<br />&nbsp;&quot; W W W W W W W W W W W W W W W W W W W W WW W W W &quot;,<br />&nbsp;&quot; X X X X X X X X X X X X X X X X X X X X X XX X X &quot;,<br />&nbsp;&quot; Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y YY Y &quot;,<br />&nbsp;&quot; Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z ZZZ&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">start</span>
+                                <span class="value data">
+                                
+                                    { 49, 49 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">finish</span>
+                                <span class="value data">
+                                
+                                    { 38, 26 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            23
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">source</span>
+                                <span class="value data">
+                                
+                                    { &quot;AAA&quot;, &quot;BB&quot;, &quot;CCC&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">start</span>
+                                <span class="value data">
+                                
+                                    { 1, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">finish</span>
+                                <span class="value data">
+                                
+                                    { 1, 1 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            0
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">source</span>
+                                <span class="value data">
+                                
+                                    { &quot;AAAAA AAA AAAAAAAAAAAAA  AAAA&quot;, &quot;AA   AAAAAAAAA AAAA     AAAA&quot;, &quot;BBBBBBBBBBBBBBBBBBBBBBBBBBB&quot;, &quot;BBBBBBB BBBBBBBBBB BBBBBBB&quot;, &quot;CCC CCCC CCCCCC      CCCC&quot;, &quot;DDDDDDDDDDDDDDDDDDD&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">start</span>
+                                <span class="value data">
+                                
+                                    { 2, 17 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">finish</span>
+                                <span class="value data">
+                                
+                                    { 1, 2 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            4
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">source</span>
+                                <span class="value data">
+                                
+                                    { &quot;A PC to do CAD huh  Sounds reasonable&quot;, &quot;Aurthor go out and buy us five new PCs&quot;, &quot;Dont you want to think about this for a minute&quot;, &quot;No every second counts and we want to be ahead of&quot;, &quot;the competition&quot;, &quot;       OK Greate idea Please place lOOk worth of&quot;, &quot;unmarked bills in my suitcase and Ill be on my way&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">start</span>
+                                <span class="value data">
+                                
+                                    { 0, 11 }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">finish</span>
+                                <span class="value data">
+                                
+                                    { 1, 15 }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            2
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

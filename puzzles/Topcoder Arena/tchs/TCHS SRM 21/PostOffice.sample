@@ -1,0 +1,25 @@
+-- Example 0
+145 West 44th Street
+145 west 44 th street
+
+-1
+-- Example 1
+ wall street 
+WallStreet
+
+-1
+-- Example 2
+ Wall Street
+  Waal Street
+
+2
+-- Example 3
+                                                 A
+a                                                 
+
+-1
+-- Example 4
+Wall
+WallStreet
+
+4

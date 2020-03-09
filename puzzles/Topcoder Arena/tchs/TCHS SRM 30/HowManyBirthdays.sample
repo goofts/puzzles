@@ -1,0 +1,61 @@
+-- Example 0
+1
+igor 13 6
+14 6
+
+0
+-- Example 1
+1
+sasha 12 5
+12 5
+
+1
+sasha
+-- Example 2
+4
+larisa 27 3
+kira 7 4
+max 12 3
+kirill 27 3
+27 3
+
+2
+kirill
+larisa
+-- Example 3
+5
+zoro 31 2
+pokemon 16 12
+spiderman 31 12
+dragon 13 7
+elf 31 12
+31 12
+
+2
+elf
+spiderman
+-- Example 4
+6
+ann 6 6
+tanya 6 6
+gudi 6 6
+ruslik 6 6
+alla 6 6
+serge 10 10
+6 6
+
+5
+alla
+ann
+gudi
+ruslik
+tanya
+-- Example 5
+4
+ahdjakdd 31 12
+fhdfjha 1 1
+wefhjks 13 6
+fkajahsdaaajj 6 7
+5 12
+
+0

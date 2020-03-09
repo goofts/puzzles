@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder TCHS SRM 7 - 1000: EnclosingRectangle</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>TCHS SRM 7</span>
+        <span id='contest-division'>1</span>
+        <span id='problem-score'>1000</span>
+        <span id='problem-name'>EnclosingRectangle</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro escaped="1"><p>
+You are given an even number of points in the plane. You want to find a rectangle whose corners have integer coordinates and sides are parallel to the axes, such that <i>at least half</i> of the given points lie in the <i>interior</i> of the rectangle. Return the area of the smallest such rectangle. (&quot;Smallest rectangle&quot; means the rectangle with the smallest area.) Note that if a point lies on the edge of the rectangle, it does not count as being in the interior.
+</p>
+<p>
+The input is formatted as follows. You are given <type>String[]</type> <b>X</b> and <type>String[]</type> <b>Y</b>. The first thing that you should do is concatenate the elements of <b>X</b> to form a single <type>String</type>. This <type>String</type> contains up to 100 integer numbers without extra leading zeroes, each separated by one or more spaces. The <i>i</i>th number in this <type>String</type> is the x-coordinate of the <i>i</i>th point. Similarly, you should concatenate the elements of <b>Y</b> to form a single <type>String</type>. That <type>String</type> also contains up to 100 integer numbers without extra leading zeroes, each separated by one or more spaces. The <i>i</i>th number in this <type>String</type> is the y-coordinate of the <i>i</i>th point.
+</p></intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>EnclosingRectangle</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>smallestArea</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        tuple(string)
+                    , 
+                        tuple(string)
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        integer
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        def smallestArea(self, X, Y)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>64</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    <!-- Notes -->
+    <div class="section">
+        <h2 class="section-title">Notes</h2>
+        <ul class="notes">
+        
+            <li><note escaped="1">If a point lies on the edge of a rectangle, it does not count as being in the interior of that rectangle.</note></li>
+        
+        </ul>
+    </div>
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint escaped="1"><b>X</b> contains between 1 and 50 elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <b>X</b> is a <type>String</type> which contains between 0 and 50 characters, inclusive. Each character is a digit ('0'-'9') or a space (' ').</user-constraint></li>
+        
+            <li><user-constraint escaped="1">The <type>String</type> formed by concatenating the elements of <b>X</b> has no leading or trailing spaces, and consists of a list of integer numbers separated by one or more spaces. Each number in the list is between 0 and 10000, inclusive, and has no extra leading zeroes.</user-constraint></li>
+        
+            <li><user-constraint escaped="1"><b>Y</b> contains between 1 and 50 elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">Each element of <b>Y</b> is a <type>String</type> which contains between 0 and 50 characters, inclusive. Each character is a digit ('0'-'9') or a space (' ').</user-constraint></li>
+        
+            <li><user-constraint escaped="1">The <type>String</type> formed by concatenating the elements of <b>Y</b> has no leading or trailing spaces, and consists of a list of integer numbers separated by one or more spaces. Each number in the list is between 0 and 10000, inclusive, and has no extra leading zeroes.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">The number of integers represented in <b>X</b> is the same as the number of integers represented in <b>Y</b>, which is an even number between 2 and 100, inclusive.</user-constraint></li>
+        
+            <li><user-constraint escaped="1">All points are distinct.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">X</span>
+                                <span class="value data">
+                                
+                                    { &quot;100 200&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">Y</span>
+                                <span class="value data">
+                                
+                                    { &quot;100 200&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            4
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">We have two points (100,100) and (200,200). One way to enclose at least one point is to have the rectangle with opposite corners at (99,99) and (101,101). The area of this rectangle is 4.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">X</span>
+                                <span class="value data">
+                                
+                                    { &quot;10 11 13 10 11 13&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">Y</span>
+                                <span class="value data">
+                                
+                                    { &quot;5 5 5 15 16 17&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            10
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">We have six points (10,5), (11,5), (13,5), (10,15), (11,16), (13,17). The rectangle with opposite corners at (9,4) and (14,6) encloses the first three points. It turns out that no smaller rectangle can enclose at least three of the six given points. The area of this rectangle is 10.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">X</span>
+                                <span class="value data">
+                                
+                                    { &quot;5 6 6 7 7 8 8 9&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">Y</span>
+                                <span class="value data">
+                                
+                                    { &quot;7 6 8 5 9 6 8 7&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            16
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">These points form a diamond shape</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">X</span>
+                                <span class="value data">
+                                
+                                    { &quot;4496 6443 2837 557 4098 1083 3466 1250 6126 &quot;, &quot;3135 7598 9274 9180 5128 741 7625 8316 414 &quot;, &quot;9071 8753 5509 1080 2797 906 3805 698 947 &quot;, &quot;8645 9640 2596 6883 1845 9169 3922 4792 7919 &quot;, &quot;7389 9397 4901 1343 3347 6366 9118 3148 780 &quot;, &quot;4541 9479 483 1174 9615 8900 3067 5397 9879 &quot;, &quot;7440 8948 846 8881 7602 6760 3327 5197 9017 &quot;, &quot;5463 6781 2478 6270 5392 9420 9069 3609 6401 &quot;, &quot;1810 6680 6787 9840 1031 1916 5415 1168 5154 &quot;, &quot;2727 8834 9125 3961 4289 4750 5524 5118 5258 &quot;, &quot;2652 7020 9770 5866 3386 6447 7960 3889 2158 &quot;, &quot;6717&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">Y</span>
+                                <span class="value data">
+                                
+                                    { &quot;6801 8243 9390 2156 5505 5509 3442 6663 1294 &quot;, &quot;9979 1008 5644 7516 5442 5909 4550 2431 2779 &quot;, &quot;419 4744 8155 7800 2944 4169 1633 1464 7353 &quot;, &quot;5365 1548 3073 8596 4461 2540 4664 5057 1870 &quot;, &quot;4782 4028 8003 9175 2592 4520 2420 6955 519 &quot;, &quot;2141 1580 5170 9138 4268 9724 1093 5633 9820 &quot;, &quot;3411 9789 6200 7661 2296 8644 8259 8631 4342 &quot;, &quot;574 530 6664 8812 161 8141 6210 2803 3209 &quot;, &quot;8090 6380 3498 3014 7650 7062 8853 5939 4578 &quot;, &quot;8647 4020 4844 3362 4930 9447 1346 6162 8242 &quot;, &quot;9276 6967 589 6960 5467 8768 9018 8155 3886 &quot;, &quot;7274&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            37305252
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">One hundred points.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">X</span>
+                                <span class="value data">
+                                
+                                    { &quot;5481    3318      5721      9019 &quot;, &quot;1618       9762  1654     2275 &quot;, &quot;5361    307 6833             9456  &quot;, &quot;7473 6088 9685 2725&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">Y</span>
+                                <span class="value data">
+                                
+                                    { &quot;1181     7762        3889    7015 &quot;, &quot;    5445   9063        2510           8229 &quot;, &quot;   4390      6454   9197    708 &quot;, &quot;  2221    9012     2665      8308&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            25959465
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">X</span>
+                                <span class="value data">
+                                
+                                    { &quot;1242 9594 6816 833 6587 7183 9355 7087 &quot;, &quot;  &quot;, &quot;8675 5944 786 3597 1327 9884 7138 8073 &quot;, &quot;&quot;, &quot;3017 5468 331 8136&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">Y</span>
+                                <span class="value data">
+                                
+                                    { &quot;1105 7791 7865 8119 &quot;, &quot;9950 8261 5988 1708 &quot;, &quot;1615 5400 487 4837 4712 5777 3819 &quot;, &quot;&quot;, &quot;5063 5143 5990 2895 4375&quot;, &quot;&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            18598707
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">X</span>
+                                <span class="value data">
+                                
+                                    { &quot;100&quot;, &quot; 200&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">Y</span>
+                                <span class="value data">
+                                
+                                    { &quot;100 2&quot;, &quot;00&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            4
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment">Remember to concatenate the elements of X and Y first.</div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>

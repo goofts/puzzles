@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TopCoder SRM 158 - 500: StampPads</title>
+    
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.topcoder.com/i/favicon.ico"/>
+    
+
+    
+    <style type="text/css">
+        /* font */
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+ul.constraints > li:before, ul.notes > li:before {
+    font-family: monospace;
+    font-weight: normal;
+}
+.heading {
+    font-weight: bold;
+    font-size: 175%;
+    line-height: 1.2em;
+}
+.section .section-title {
+    font-weight: bold;
+    font-size: 125%;
+}
+ol.testcases > li:before {
+    font-family: monospace;
+}
+type {
+    font-weight: bold;
+    font-family: monospace;
+}
+li.testcase .data {
+    font-family: monospace;
+    line-height: 1.5em;
+}
+
+/* layout */
+.heading {
+    margin-top: 0.1em;
+    margin-bottom:0.1em;
+    text-align: center;
+}
+.section .section-title {
+    margin-top : 1em;
+    margin-bottom: 1em;
+}
+.problem-intro, note, user-constraint {
+    padding-left: 1.25em;
+}
+
+/* Lists */
+ul.constraints, ul.notes, ul.variables, ul.problem-definition-lines {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.constraints > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+ul.notes > li:before {
+    content: "-";
+    position:relative;
+    margin-left: 0px; /* optional, for multiline li element */
+    left: 0.625em;
+}
+
+/* Testcases */
+li.testcase {
+    line-height: 1.1em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+    overflow: auto;
+}
+li.testcase > .testcase-content > div { padding-bottom: 0.5em; padding-left: 1em; }
+
+li.testcase .testcase-comment {
+    margin: 0;
+    padding-left: 1em;
+}
+.testcase-comment p:first-child { margin-top: 0; }
+.testcase-comment p:last-child { margin-bottom: 0; }
+
+li.testcase .testcase-content {
+    margin: 0.31em;
+}
+
+/* Data and variables */
+.testcase-output {
+    padding: 0.2em 1em 0.2em 0em;
+}
+.variables, .testcase-output {
+    margin-left: 0.5em;
+    display: table;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.variable {
+    display: table-row;
+}
+.variable .name {
+    padding: 0.2em 0em 0.2em 1em;
+    font-weight: bold;
+    display: table-cell;
+    text-align: right;
+}
+.testcase-output .prefix {
+    padding: 0.2em 0em 0.2em 1em;
+    display: table-cell;
+}
+.testcase-output .prefix:after {
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .name:after {
+    font-weight: bold;
+    content : ":";
+    padding-right: 0.5em;
+}
+.variable .value, .testcase-output .value {
+    padding: 0.2em 1em 0.2em 0em;
+    display: table-cell;
+}
+ol.testcases {
+    padding: 0px;
+    counter-reset: test_number -1;
+}
+ol.testcases > li {
+    list-style:none;
+}
+ol.testcases > li:before {
+    counter-increment:test_number;
+    display: block;
+    clear: both;
+    content:counter(test_number) ")";
+    color: inherit;
+    background: inherit;
+}
+
+/* Problem Definition */
+.problem-definition, .problem-limits {
+    padding-left: 1.25em;
+}
+.problem-definition-lines, .limit-lines {
+    display: table;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+.definition-line, .limit-line {
+    display: table-row;
+    height: 1.5em;
+    overflow: auto;
+}
+.limit-name:after {
+    content: ":";
+    margin-right: 1em;
+}
+.definition-name, .definition-value, .limit-name, .limit-value {
+    display: table-cell;
+}
+.definition-value {
+    padding-left: 0.5em;
+}
+.definition-name:after {
+    content: ":";
+}
+#contest-division:before {
+    content: "Div ";
+}
+#problem-score:before {
+    content: "- Problem ";
+}
+#problem-name {
+    display: block;
+}
+
+/* Tags, hidden default */
+.tag {
+    visibility: hidden;
+    position: absolute;
+}
+
+        body {
+    /* font color */
+    color: #333333;
+    /* background color */
+    background-color: white;
+}
+.section .section-title {
+    /* title color */
+    color: black;
+}
+li.testcase .data {
+    /* highlight color */
+    background: #eee;
+}
+
+    </style>
+    
+    
+    
+
+</head>
+
+<body>
+    <h1 class="heading">
+        <span id='contest-name'>SRM 158</span>
+        <span id='contest-division'>1</span>
+        <span id='problem-score'>500</span>
+        <span id='problem-name'>StampPads</span>
+    </h1>
+
+    <hr />
+
+    <!-- Problem Statement -->
+    <div class="section">
+        <h2 class="section-title">Problem Statement</h2>
+        <div class="problem-intro">
+            <intro><p>
+<i>Note to plugin users: there is an image in this problem statement.  Please view the statement in the applet to see the image</i>
+</p>
+<p>
+There is a collection of multi-colored stamp pads at the local craft store.  Each pad has 5 colors on it, arranged as pie wedges (see picture).  The wedges can be switched out with other wedges, so you can create the ultimate blend of colors for your favorite stamp.  You have a wish list of certain colors, but each pad set is expensive, so you want to minimize the cost.  Given the colors of each pad and the colors you want, return the minimum number of pad sets that you must buy in order to get the right colors.
+</p>
+
+<p>
+Here is an example of a stamp pad that you can buy:
+</p>
+
+<p>
+<img src="http://www.topcoder.com/contest/problem/StampPads/stamps.png"></img>
+</p>
+
+<p>
+You will be given a <type>String[]</type> <b>pads</b>, and a <type>String[]</type> <b>wishlist</b>.  Each element in <b>pads</b> represents a stamp pad with 5 colors on it.  Each pad will be in the format:
+</p>
+
+<p>
+<tt>&quot;&lt;color&gt; &lt;color&gt; &lt;color&gt; &lt;color&gt; &lt;color&gt;&quot;</tt>
+</p>
+
+<p>
+Each &lt;color&gt; will be a <type>String</type> of lower case letters 'a' - 'z', and the colors will be separated by single spaces.  For example, the above stamp pad would be represented by the <type>String</type>:
+</p>
+
+<p>
+<tt>&quot;yellow red purple blue cyan&quot;</tt>
+</p>
+
+<p>
+Each element of <b>wishlist</b> is a color that you wish to own.  Your method should return the minimum number of <b>pads</b> you must buy to get all the colors in <b>wishlist</b>, or -1 if it is not possible to do.
+</p></intro>
+        </div>
+    </div>
+    
+    <!-- Problem definition -->
+    
+    <div class="section" id="definition">
+        <h2 class="section-title">Definition</h2>
+        <div class="problem-definition">
+            <ul class="problem-definition-lines">
+                <li class="definition-line" id='class-line'>
+                    <span class='definition-name'>Class</span>
+                    <span class='definition-value'>StampPads</span>
+                </li>
+                <li class="definition-line" id='method-line'>
+                    <span class='definition-name'>Method</span>
+                    <span class='definition-value'>bestCombo</span>
+                </li>
+                <li class="definition-line" id='parameters-line'>
+                    <span class='definition-name'>Parameters</span>
+                    <span class='definition-value'>
+                    
+                        vector&lt;string&gt;
+                    , 
+                        vector&lt;string&gt;
+                    
+                    </span>
+                </li>
+                <li class="definition-line" id='returns-line'>
+                    <span class='definition-name'>Returns</span>
+                    <span class='definition-value'>
+                        int
+                    </span>
+                </li>
+                <li class="definition-line" id='signature-line'>
+                    <span class='definition-name'>Method signature</span>
+                    <span class='definition-value'>
+                        int bestCombo(vector&lt;string&gt; pads, vector&lt;string&gt; wishlist)
+                    </span>
+                </li>
+            </ul>
+            <div class="problem-definition-public-tip">(be sure your method is public)</div>
+        </div>        
+    </div>
+    
+
+    <!-- Limits -->
+    <div class="section">
+        <h2 class="section-title">Limits</h2>
+        <div class='problem-limits'>
+            <ul class="limit-lines">
+                <li class='limit-line'>
+                    <span class='limit-name'>Time limit (s)</span>
+                    <span class='limit-value'>2.000</span>
+                </li>
+                <li class='limit-line'>
+                    <span class='limit-name'>Memory limit (MB)</span>
+                    <span class='limit-value'>64</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    
+    
+    <!-- Constraints -->
+    <div class="section">
+        <h2 class="section-title">Constraints</h2>
+        <ul class="constraints">
+        
+            <li><user-constraint><b>pads</b> will have between 1 and 20 elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint>Each element in <b>pads</b> will have between 9 and 50 characters, inclusive.</user-constraint></li>
+        
+            <li><user-constraint>Each element in <b>pads</b> will consist of exactly 5 color names separated by single spaces.</user-constraint></li>
+        
+            <li><user-constraint>Each color name in <b>pads</b> will have between 1 and 15 characters, inclusive, and will consist of only lowercase letters 'a'-'z', inclusive.</user-constraint></li>
+        
+            <li><user-constraint>There will be no repeated color names in a single element of <b>pads</b></user-constraint></li>
+        
+            <li><user-constraint><b>wishlist</b> will have between 1 and 25 elements, inclusive.</user-constraint></li>
+        
+            <li><user-constraint>Each element of <b>wishlist</b> will have between 1 and 15 characters, inclusive, and will consist of only lowercase letters 'a'-'z', inclusive.</user-constraint></li>
+        
+            <li><user-constraint>There will be no repeated elements in <b>wishlist</b>.</user-constraint></li>
+        
+        </ul>
+    </div>
+
+    <!-- Test cases -->
+    <div class="section">
+        <h2 class="section-title">Test cases</h2>
+        <ol class="testcases" start='0'>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">pads</span>
+                                <span class="value data">
+                                
+                                    { &quot;yellow red purple blue cyan&quot;, &quot;red green orange magenta yellow&quot;, &quot;brown black orange yellow tan&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">wishlist</span>
+                                <span class="value data">
+                                
+                                    { &quot;orange&quot;, &quot;yellow&quot;, &quot;red&quot;, &quot;blue&quot;, &quot;magenta&quot;, &quot;tan&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            3
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment"><p>
+We can only get blue from the first pad, magenta from the second pad, and tan from the last.  Therefore, all three must be purchased.
+</p></div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">pads</span>
+                                <span class="value data">
+                                
+                                    { &quot;yellow red purple blue cyan&quot;, &quot;red green orange magenta yellow&quot;, &quot;brown black orange yellow tan&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">wishlist</span>
+                                <span class="value data">
+                                
+                                    { &quot;orange&quot;, &quot;yellow&quot;, &quot;red&quot;, &quot;blue&quot;, &quot;tan&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            2
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment"><p>
+Although we can get orange and yellow from the second pad, we can get orange, yellow, and tan from the last, so the second is unnecessary.
+</p></div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">pads</span>
+                                <span class="value data">
+                                
+                                    { &quot;yellow black blue green red&quot;, &quot;yellow brown cyan magenta tan&quot;, &quot;black grey fire maroon silver&quot;, &quot;blue white neon tangerine rust&quot;, &quot;green orange soot turquoise mint&quot;, &quot;red cream opal chrome sky&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">wishlist</span>
+                                <span class="value data">
+                                
+                                    { &quot;yellow&quot;, &quot;black&quot;, &quot;blue&quot;, &quot;green&quot;, &quot;red&quot;, &quot;brown&quot;, &quot;grey&quot;, &quot;white&quot;, &quot;orange&quot;, &quot;cream&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            5
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment"><p>
+Although you can buy the first pad and get 5 colors on the <b>wishlist</b>, you still must buy the other 5 to get the rest of the colors.  However, if you just buy the last 5 pads, you get all the colors.
+</p></div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">pads</span>
+                                <span class="value data">
+                                
+                                    { &quot;red green orange magenta yellow&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">wishlist</span>
+                                <span class="value data">
+                                
+                                    { &quot;silver&quot; }
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            -1
+                        
+                        </span>
+                    </div>
+                    
+                    <div class="testcase-annotation">
+                        <div class='tag'>note</div>
+                        <div class="testcase-comment"><p>
+The single stamp pad available does not have silver, so the <b>wishlist</b> is impossible to fulfill.
+</p></div>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+            <li class="testcase">
+                <div class="testcase-content">
+                    <div class="testcase-input">
+                        <div class='tag'>input</div>
+                        <ul class="variables">
+                        
+                            <li class="variable data">
+                                <span class="name data">pads</span>
+                                <span class="value data">
+                                
+                                    {&quot;a i y d o&quot;,<br />&nbsp;&quot;t s k g e&quot;,<br />&nbsp;&quot;j u w i k&quot;,<br />&nbsp;&quot;u k l s j&quot;,<br />&nbsp;&quot;q s a c y&quot;,<br />&nbsp;&quot;q m d x a&quot;,<br />&nbsp;&quot;m s l h r&quot;,<br />&nbsp;&quot;s x q l n&quot;,<br />&nbsp;&quot;u r j s k&quot;,<br />&nbsp;&quot;e w v d p&quot;,<br />&nbsp;&quot;o l a b q&quot;,<br />&nbsp;&quot;f z g a m&quot;,<br />&nbsp;&quot;o g k b a&quot;,<br />&nbsp;&quot;c h g k t&quot;,<br />&nbsp;&quot;z v s n x&quot;,<br />&nbsp;&quot;z n b w c&quot;,<br />&nbsp;&quot;h p o u k&quot;,<br />&nbsp;&quot;t z o x m&quot;,<br />&nbsp;&quot;a w i v z&quot;,<br />&nbsp;&quot;u t v m y&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                            <li class="variable data">
+                                <span class="name data">wishlist</span>
+                                <span class="value data">
+                                
+                                    {&quot;x&quot;,<br />&nbsp;&quot;b&quot;,<br />&nbsp;&quot;u&quot;,<br />&nbsp;&quot;c&quot;,<br />&nbsp;&quot;h&quot;,<br />&nbsp;&quot;j&quot;,<br />&nbsp;&quot;t&quot;,<br />&nbsp;&quot;v&quot;,<br />&nbsp;&quot;d&quot;,<br />&nbsp;&quot;g&quot;,<br />&nbsp;&quot;k&quot;,<br />&nbsp;&quot;w&quot;,<br />&nbsp;&quot;y&quot;,<br />&nbsp;&quot;z&quot;,<br />&nbsp;&quot;a&quot;,<br />&nbsp;&quot;i&quot;,<br />&nbsp;&quot;m&quot;,<br />&nbsp;&quot;l&quot;,<br />&nbsp;&quot;n&quot;,<br />&nbsp;&quot;e&quot;}
+                                
+                                </span>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    <div class="testcase-output">
+                        <div class='tag'>output</div>
+                        <span class="prefix data">Returns</span>
+                        <span class="value data">
+                        
+                            6
+                        
+                        </span>
+                    </div>
+                    
+               
+                </div>
+            </li>
+            
+        </ol>
+    </div>
+    <hr />
+
+    This problem statement is the exclusive and proprietary property of TopCoder, Inc. Any unauthorized use or reproduction of this information without the prior written consent of TopCoder, Inc. is strictly prohibited. (c)2003, TopCoder, Inc. All rights reserved.
+</body>
+</html>
